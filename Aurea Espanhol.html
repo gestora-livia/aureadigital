@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Áurea Digital | Coproducción para la Salud</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --verde-fundo: #0a1410;
+            --verde-secao: #0f1f18;
+            --verde-marca: #1B3829;
+            --dourado: #C5A059;
+            --dourado-claro: #E5C585;
+            --texto-claro: #F3F4F6;
+            --texto-cinza: #9ca3af;
+            --erro: #ef4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Raleway', sans-serif; }
+        
+        body {
+            background-color: var(--verde-fundo);
+            color: var(--texto-claro);
+            line-height: 1.6;
+            font-size: 18px;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { font-weight: 700; line-height: 1.2; color: #fff; }
+        .highlight { color: var(--dourado); }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; position: relative; }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            background: linear-gradient(135deg, var(--dourado), var(--dourado-claro));
+            color: #0f1f18;
+            padding: 20px 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(197, 160, 89, 0.3);
+            border: 1px solid var(--dourado-claro);
+            white-space: nowrap;
+        }
+        .btn:hover { transform: translateY(-3px); filter: brightness(1.1); }
+
+        header {
+            padding: 30px 0;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+        .logo-area { display: flex; justify-content: flex-start; padding-left: 5%; } 
+        .logo-area img { height: 70px; width: auto; }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: 
+                linear-gradient(to right, #0a1410 40%, rgba(10, 20, 16, 0.1) 100%),
+                url('topo.jpg');
+            background-size: cover;
+            background-position: center center; 
+        }
+
+        .hero .container { 
+            display: flex; 
+            justify-content: flex-start; 
+            width: 100%; 
+            max-width: 100%;
+            margin: 0;
+            padding-left: 5%;
+        }
+
+        .hero-content {
+            width: 100%;
+            max-width: 750px;
+            position: relative;
+            z-index: 2;
+            padding-top: 100px;
+            text-align: left;
+        }
+
+        .hero h1 { font-size: 4rem; margin-bottom: 30px; text-shadow: 0 4px 30px rgba(0,0,0,0.9); }
+        .hero p {
+            font-size: 1.4rem; color: #e5e7eb; margin-bottom: 50px;
+            border-left: 5px solid var(--dourado); padding-left: 30px; font-weight: 500;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.9); line-height: 1.6;
+        }
+
+        .stats-bar {
+            background: var(--verde-fundo); padding: 60px 0;
+            border-top: 1px solid rgba(255,255,255,0.05); position: relative; z-index: 3;
+        }
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; text-align: center; }
+        .stat-item h3 { font-size: 3.5rem; color: var(--dourado); margin-bottom: 5px; font-weight: 800; }
+        .stat-item p { text-transform: uppercase; letter-spacing: 2px; font-size: 1rem; opacity: 0.9; }
+
+        section { padding: 120px 0; }
+        .section-title { text-align: center; margin-bottom: 80px; }
+        .section-title h2 { font-size: 3rem; margin-bottom: 20px; }
+        .section-title p { color: var(--texto-cinza); max-width: 800px; margin: 0 auto; font-size: 1.3rem; }
+
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
+        .card {
+            background: rgba(255,255,255,0.03); padding: 50px; border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.05); transition: 0.4s;
+        }
+        .card:hover { transform: translateY(-5px); border-color: var(--dourado); background: rgba(255,255,255,0.05); }
+        .card i { font-size: 2.5rem; color: var(--dourado); margin-bottom: 25px; }
+        .card h3 { font-size: 1.5rem; margin-bottom: 20px; color: #fff; }
+        .card p { color: var(--texto-cinza); font-size: 1.1rem; }
+
+        .problem-list { max-width: 900px; margin: 0 auto; font-size: 1.3rem; }
+        .problem-item { margin-bottom: 20px; padding: 30px; border-left: 4px solid #333; background: rgba(255,255,255,0.02); }
+
+        .truth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .dont-need li { list-style: none; margin-bottom: 20px; color: var(--texto-cinza); font-size: 1.3rem; }
+        .dont-need i { color: var(--erro); margin-right: 15px; }
+        .do-need { background: var(--verde-secao); padding: 60px; border-radius: 15px; border: 1px solid var(--dourado); text-align: center; }
+        .do-need h3 { font-size: 2.2rem; color: var(--dourado); margin: 25px 0; }
+
+        .icon-list li { margin-bottom: 20px; display: flex; align-items: center; font-size: 1.3rem; }
+        .icon-list i { color: var(--dourado); margin-right: 20px; font-size: 1.5rem; min-width: 30px; }
+
+        .guarantee-box {
+            border: 2px solid var(--dourado); padding: 80px; text-align: center; border-radius: 20px;
+            max-width: 900px; margin: 0 auto; background: radial-gradient(circle, rgba(197, 160, 89, 0.05) 0%, rgba(10, 20, 16, 0) 70%);
+        }
+
+        /* ESTILOS DA EQUIPA / LÍVIA */
+        .team-section { background-color: var(--verde-fundo); }
+        .team-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: center; }
+        .team-image-container { position: relative; width: 100%; max-width: 500px; margin: 0 auto; }
+        .team-image { width: 100%; border-radius: 20px; display: block; object-fit: cover; }
+        
+        /* Círculo branco para o selo do ClickUp */
+        .clickup-badge-container {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 150px;
+            height: 150px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden; /* Corta as margens que saem fora do círculo */
+        }
+        .clickup-badge { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transform: scale(1.25); /* Dá um zoom na imagem para eliminar o espaço branco */
+            display: block; 
+        }
+
+        .team-content h2 { font-size: 2.5rem; margin-bottom: 10px; color: var(--dourado); }
+        .team-content h3 { font-size: 1.5rem; margin-bottom: 30px; color: #fff; font-weight: 400; }
+        .team-content p { font-size: 1.15rem; color: var(--texto-cinza); margin-bottom: 20px; }
+        
+        .social-links { margin-top: 30px; display: flex; flex-direction: column; gap: 10px; }
+        .social-links a { color: var(--dourado); text-decoration: none; font-weight: 600; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
+        .social-links a:hover { color: var(--dourado-claro); transform: translateX(5px); }
+
+        .objecao-item { margin-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
+        .objecao-titulo { color: var(--dourado); font-weight: 700; font-size: 1.4rem; margin-bottom: 10px; }
+
+        .cta-final {
+            background: linear-gradient(rgba(10, 20, 16, 0.9), rgba(10, 20, 16, 0.95)), url('topo.jpg');
+            background-size: cover; text-align: center; padding: 150px 20px;
+        }
+
+        footer {
+            background: #050806; padding: 60px 0; text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05); color: #6b7280; font-size: 1rem;
+        }
+
+        @media (max-width: 900px) {
+            .hero { background-position: 70% center; }
+            .hero h1 { font-size: 2.8rem; }
+            .stats-grid, .truth-grid, .team-grid { grid-template-columns: 1fr; gap: 40px; }
+            .btn { width: 100%; white-space: normal; }
+            .clickup-badge-container {
+                width: 120px;
+                height: 120px;
+                right: -10px;
+                bottom: -10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <img src="logo.png" alt="Áurea Digital" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="logo-text" style="display:none; color:#fff; font-weight:800;">ÁUREA DIGITAL</div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Transforma tu conocimiento científico en <span class="highlight">libertad, impacto y propósito.</span></h1>
+                <p>Para profesionales de la salud que desean enseñar, crecer y expandir sus vidas a través del mundo digital — con estrategia, ética y claridad.</p>
+                <a href="https://wa.me/556792468403" class="btn"><i class="fab fa-whatsapp"></i> Quiero aplicar para la Coproducción</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item"><h3>+R$ 5 M</h3><p>En Ventas Online</p></div>
+                <div class="stat-item"><h3>+100</h3><p>Proyectos Estructurados</p></div>
+                <div class="stat-item"><h3>Salud</h3><p>Especialistas en el Área</p></div>
+            </div>
+        </div>
+    </div>
+
+    <section style="background-color: var(--verde-secao);">
+        <div class="container">
+            <div class="section-title">
+                <h2>El problema que nadie dice en voz alta</h2>
+                <p>Estudiaste por años. Cargaste con responsabilidad, ciencia y cuidado. Pero tu rutina sigue siendo así:</p>
+            </div>
+            <div class="problem-list">
+                <div class="problem-item"><strong>Agenda demasiado llena.</strong> Poco tiempo disponible.</div>
+                <div class="problem-item"><strong>Cansancio constante</strong> y nula claridad sobre cómo entrar al mundo digital.</div>
+                <div class="problem-item"><strong>Mucho conocimiento</strong> — poca visibilidad.</div>
+            </div>
+            <p style="text-align: center; margin-top: 50px; font-style: italic; color: #fff; font-size: 1.4rem;">
+                "Podría estar transformando más vidas… pero no sé por dónde empezar."
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="truth-grid">
+                <div>
+                    <h3 style="margin-bottom: 30px; font-size: 2rem;">Tú NO necesitas:</h3>
+                    <ul class="dont-need">
+                        <li><i class="fas fa-times"></i> Volverte experto en marketing</li>
+                        <li><i class="fas fa-times"></i> Aparecer todos los días</li>
+                        <li><i class="fas fa-times"></i> Hacer lanzamientos agresivos</li>
+                        <li><i class="fas fa-times"></i> Aprender 7 áreas diferentes por tu cuenta</li>
+                    </ul>
+                </div>
+                <div class="do-need">
+                    <p style="color: #fff; font-size: 1.2rem;">Necesitas 3 cosas:</p>
+                    <h3>Claridad → Estructura → Expansión</h3>
+                    <p style="color: #ccc;">Y eso es exactamente lo que Áurea entrega.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background-color: var(--verde-secao);">
+        <div class="container">
+            <div class="section-title"><h2>El Método Áurea</h2></div>
+            <div class="cards-grid">
+                <div class="card"><i class="fas fa-lightbulb"></i><h3>Claridad</h3><p>Posicionamiento, mensaje, esencia. Finalmente entiendes quién eres.</p></div>
+                <div class="card"><i class="fas fa-chess-board"></i><h3>Estructura</h3><p>Transformamos tu conocimiento científico en un método propio y un producto estructurado.</p></div>
+                <div class="card"><i class="fas fa-rocket"></i><h3>Expansión</h3><p>Comunicación ética + estrategia digital + lanzamiento. Sin "overmarketing".</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="section-title">
+                <h2>¿Qué es la Coproducción?</h2>
+                <p>Es un proceso de coautoría y estrategia.</p>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 60px;">
+                <ul class="icon-list">
+                    <li><i class="fas fa-star"></i> Tu método propio</li>
+                    <li><i class="fas fa-star"></i> Tu producto digital</li>
+                    <li><i class="fas fa-star"></i> Tu claridad</li>
+                </ul>
+                <ul class="icon-list">
+                    <li><i class="fas fa-check"></i> Mentorías estratégicas</li>
+                    <li><i class="fas fa-check"></i> Mapas y frameworks</li>
+                    <li><i class="fas fa-check"></i> Estructuración completa</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section style="background-color: var(--verde-secao);">
+        <div class="container">
+            <div class="section-title"><h2>¿Para quién es?</h2></div>
+            <div style="max-width: 700px; margin: 0 auto;">
+                <ul class="icon-list">
+                    <li><i class="fas fa-check-circle"></i> Personas con conocimiento profundo.</li>
+                    <li><i class="fas fa-check-circle"></i> Que sienten que podrían ayudar a más personas.</li>
+                    <li><i class="fas fa-check-circle"></i> Que están cansadas del modelo 1:1.</li>
+                    <li><i class="fas fa-check-circle"></i> Que desean libertad sin perder la ética.</li>
+                    <li><i class="fas fa-check-circle"></i> Que quieren crear algo verdadero, humano y consistente.</li>
+                </ul>
+                <p style="text-align: center; margin-top: 30px; font-size: 1.2rem; color: var(--dourado);">Si este eres tú, estás en el lugar correcto.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="section-title">
+                <h2>Beneficios Reales</h2>
+                <p>Tu conocimiento deja de estar atrapado dentro del consultorio.</p>
+            </div>
+            <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                <div class="card"><i class="fas fa-lightbulb"></i><h3>Claridad Absoluta</h3><p>En tu mensaje.</p></div>
+                <div class="card"><i class="fas fa-fingerprint"></i><h3>Método Propio</h3><p>Construido por ti.</p></div>
+                <div class="card"><i class="fas fa-cubes"></i><h3>Producto Estructurado</h3><p>Didáctico y organizado.</p></div>
+                <div class="card"><i class="fas fa-feather"></i><h3>Ciencia con Ligereza</h3><p>Comunicación fluida.</p></div>
+                <div class="card"><i class="fas fa-calendar-minus"></i><h3>Agenda Libre</h3><p>Reduce la dependencia.</p></div>
+                <div class="card"><i class="fas fa-chart-line"></i><h3>Impacto</h3><p>Previsibilidad y escala.</p></div>
+                <div class="card"><i class="fas fa-heart"></i><h3>Orgullo</h3><p>De lo que construiste.</p></div>
+                <div class="card"><i class="fas fa-star"></i><h3>Propósito</h3><p>Libertad real.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="guarantee-box">
+                <i class="fas fa-shield-alt" style="font-size: 4rem; color: var(--dourado); margin-bottom: 30px;"></i>
+                <h3>Garantía de Libertad</h3>
+                <p>Si después de las primeras semanas sientes que no es el momento ideal, cerramos el proceso sin ningún inconveniente. Sin riesgo. Sin presión.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <div class="container">
+            <div class="team-grid">
+                <div class="team-image-container">
+                    <img src="foto_livia.jpg" alt="Lívia Lima" class="team-image">
+                    <div class="clickup-badge-container">
+                        <img src="clickup_badge.jpg" alt="Verified ClickUp Power User" class="clickup-badge">
+                    </div>
+                </div>
+                <div class="team-content">
+                    <p style="text-transform: uppercase; letter-spacing: 2px; color: var(--dourado); font-weight: 700; margin-bottom: 10px;">Quién está detrás de Áurea Digital</p>
+                    <h2>Lívia Lima</h2>
+                    <h3>Estratega y coproductora especializada en lanzamientos digitales.</h3>
+                    
+                    <p>Durante los últimos 7 años, ha liderado y estructurado operaciones de infoproductores y expertos que ya vendían, pero necesitaban transformar el caos operativo en un negocio escalable y sostenible. Su enfoque combina estrategia, estructura y ejecución para que el crecimiento no dependa del “apagar incendios” diario.</p>
+                    
+                    <p>Hoy trabaja lado a lado con especialistas y marcas personales desarrollando coproductos digitales desde cero: desde la estrategia y posicionamiento, hasta la creación de la operación, el sistema de ventas y la experiencia del alumno.</p>
+                    
+                    <p>Ha coordinado más de 100 lanzamientos, desde productos de entrada hasta mentorías High Ticket, construyendo operaciones personalizadas para cada proyecto y creando estructuras capaces de crecer con previsibilidad.</p>
+                    
+                    <p>Más que gestionar lanzamientos, Lívia construye coproductos con bases sólidas para escalar a largo plazo.</p>
+                    
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/aureadigital.marketing/" target="_blank"><i class="fab fa-instagram"></i> Áurea Digital</a>
+                        <a href="https://www.instagram.com/livia.operacoesestrategicas/" target="_blank"><i class="fab fa-instagram"></i> Lívia Lima (CEO)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background-color: var(--verde-secao);">
+        <div class="container">
+            <div class="section-title"><h2>Preguntas Frecuentes</h2></div>
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div class="objecao-item">
+                    <div class="objecao-titulo">"No tengo tiempo."</div>
+                    <p>Por eso mismo necesitas algo que no dependa únicamente de tu agenda.</p>
+                </div>
+                <div class="objecao-item">
+                    <div class="objecao-titulo">"Tengo miedo al mundo digital."</div>
+                    <p>No necesitas saberlo todo — solo necesitas orientación.</p>
+                </div>
+                <div class="objecao-item">
+                    <div class="objecao-titulo">"No quiero hype ni exageraciones."</div>
+                    <p>Perfecto. Áurea no hace hype. Crea impacto sostenible.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-final">
+        <div class="container">
+            <div style="max-width: 800px; margin: 0 auto;">
+                <h2>El mundo necesita tu conocimiento.</h2>
+                <p style="margin-bottom: 40px;">La Coproducción Áurea es profunda y personalizada. Por eso, <strong>abrimos muy pocos cupos por mes.</strong></p>
+                <a href="https://wa.me/556792468403" class="btn"><i class="fab fa-whatsapp"></i> Quiero aplicar ahora</a>
+                <p style="margin-top: 40px; font-size: 1rem; opacity: 0.8;">Si tu corazón sabe que este es el momento… no pospongas más tu libertad.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p style="font-size: 1.2rem; color: #fff; margin-bottom: 10px;">Tu conocimiento es oro. Estamos aquí para hacerlo brillar.</p>
+            <p>&copy; 2025 Áurea Digital. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
